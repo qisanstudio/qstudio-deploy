@@ -1,0 +1,12 @@
+gcc
+g++
+git
+libjansson-dev
+python2.7
+python2.7-dev
+python-pip
+build-essential
+ruby
+libpcre3
+libpcre3-dev
+

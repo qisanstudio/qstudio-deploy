@@ -1,0 +1,8 @@
+virtualenv==1.11.6
+virtualenv-clone==0.2.5
+virtualenvwrapper==4.3.1
+pep8==1.5.7
+pyflakes==0.8.1
+flake8==2.2.2
+fabtools==0.19.0
+fabric==1.9.0
