@@ -1,31 +1,57 @@
 # -*- coding: utf-8 -*-
 
+import os
 import fabtools
-from fabtools.require import users
-from fabric.contrib.console import confirm
+from fabtools import require, python_setuptools
 from fabric.api import env
-
 
 
 env.hosts = ['iefschina']
 env.user = 'qisan'
 env.key_filename = '~/.ssh/id_rsa_iefschina'
 
-# create user
-def create_user(username):
-    if not fabtools.user.exists(username):
-        fabtools.user.create(username)
+PUB_KEY = os.path.join(os.path.abspath('.'), 'keys/id_rsa_droplet.pub')
 
 
-def modify_user(username, password):
-    if fabtools.user.exists(username):
-        fabtools.user.modify(username, password=password)
+def init_user(name):
+    """
+        create user
+    """
+    if not fabtools.user.exists(name):
+        fabtools.user.create(name, password='studio',
+                             shell='/bin/bash',
+                             ssh_public_keys=PUB_KEY)
+        require.users.sudoer(name)
 
 
-def add_pub_key(username):
-    fabtools.user.add_ssh_public_key(username, '/Users/liuzhiyong/.ssh/github_rsa.pub')
+def install_server():
+    '''
+        install server
+    '''
+    require.deb.packages([
+        'gcc',
+        'g++',
+        'git',
+        'libjansson-dev',
+        'python2.7',
+        'python2.7-dev',
+        'python-pip',
+        'build-essential',
+        'ruby',
+        'libpcre3',
+        'libpcre3-dev',
+        'postgresql-9.3'
+    ])
 
 
-def add_sudo(username):
-    users.sudoer(username)
-
+def init_pyenv():
+    '''
+        init python envirment
+    '''
+    python_setuptools.install([
+        'vritualenv',
+        'virtualenvwrapper',
+        'pep8',
+        'pyfakes',
+        'flake8',
+    ], use_sudo=True)
