@@ -6,9 +6,10 @@ from fabtools import require, python_setuptools
 from fabric.api import env
 
 
-env.hosts = ['iefschina']
-env.user = 'qisan'
-env.key_filename = '~/.ssh/id_rsa_iefschina'
+env.hosts = ['microsite']
+env.user = 'root'
+env.password = 'ckcenmgqqcoc'
+#env.key_filename = '~/.ssh/id_rsa_iefschina'
 
 PUB_KEY = os.path.join(os.path.abspath('.'), 'keys/id_rsa_droplet.pub')
 
