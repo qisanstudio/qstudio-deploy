@@ -1,13 +1,16 @@
 #! /usr/bin/env bash
 
 # 完善语言配置
+BASHRC = "$HOME/.bashrc"
+echo "" >> $BASHRC
+echo "export LC_ALL=en_US.UTF-8" >> $BASHRC
+echo "" >> $BASHRC
+source $BASHRC
 echo 'LANGUAGE="en_US:en"' | sudo tee --append /etc/default/locale > /dev/null
 locale-gen --purge
 sudo locale-gen en_US.UTF-8
 sudo dpkg-reconfigure locales
-echo "" >> ~/.bashrc
-echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc
-echo "" >> ~/.bashrc
+
 
 
 # 基本库安装
@@ -29,3 +32,28 @@ sudo aptitude install -y postgresql
 
 sudo pg_createcluster 9.3 main --start
 sudo service postgresql restart   # 重启DB
+
+
+# 安装virtualenv环境
+sudo apt-get install python-virtualenv
+sudo pip install virtualenvwrapper
+sudo pip install pep8
+sudo pip install pyflakes
+sudo pip install flake8
+
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> $BASHRC
+echo "source /usr/local/bin/virtualenvwrapper.sh" >> $BASHRC
+
+# 新建prod环境
+mkvirtualenv "prod"
+
+# 把node环境加入到virtualenv
+pip install nodeenv
+nodeenv --python-virtualenv
+
+# 安装qisanstudio基础库
+pip install -e 'git://github.com/qisanstudio/qstudio-launch.git#egg=qstudio-launch'
+# 完成 launch 命令补齐调用
+LAUNCH_COMPLETE="complete -C 'python -m studio.launch.complete' launch"
+echo $LAUNCH_COMPLETE >> $VIRTUAL_ENV/bin/postactivate
+#pip install -e 'git://github.com/qisanstudio/qstudio-core.git#egg=qstudio-core'
