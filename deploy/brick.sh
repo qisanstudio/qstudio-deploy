@@ -57,3 +57,4 @@ pip install -e 'git://github.com/qisanstudio/qstudio-launch.git#egg=qstudio-laun
 LAUNCH_COMPLETE="complete -C 'python -m studio.launch.complete' launch"
 echo $LAUNCH_COMPLETE >> $VIRTUAL_ENV/bin/postactivate
 #pip install -e 'git://github.com/qisanstudio/qstudio-core.git#egg=qstudio-core'
+
