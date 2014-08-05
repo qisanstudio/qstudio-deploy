@@ -1,3 +1,4 @@
+```Shell
 #! /usr/bin/env bash
 
 
@@ -27,4 +28,4 @@ export UWSGI_PROFILE=gevent pip install uwsgi
 # for node
 pip install nodeenv
 nodeenv --python-virtualenv          #把node环境加入到virtualenv
-
+```
