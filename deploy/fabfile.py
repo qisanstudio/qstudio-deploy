@@ -14,8 +14,9 @@ __all__ = ['create_user', 'throw_brick']
 
 
 MANAGER = {'name': 'qstudio', 'pwssword': 'studio'}
-SSH_D = os.path.join(os.path.abspath(__file__), 'ssh.d')
+SSH_D = os.path.join(os.path.abspath('.'), 'ssh.d')
 
+print SSH_D
 
 def _k(fn):
     return os.path.join(SSH_D, fn)

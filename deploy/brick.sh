@@ -51,6 +51,11 @@ mkvirtualenv "prod"
 pip install nodeenv
 nodeenv --python-virtualenv
 
+# 安装yeoman
+npm cache clean
+npm install -g yo
+npm install -g generator-webapp
+
 # 安装qisanstudio基础库
 pip install -e 'git://github.com/qisanstudio/qstudio-launch.git#egg=qstudio-launch'
 # 完成 launch 命令补齐调用
