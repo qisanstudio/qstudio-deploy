@@ -27,12 +27,15 @@ sudo aptitude install -y libpcre3
 sudo aptitude install -y libpcre3-dev
 sudo aptitude install -y python-pip
 sudo aptitude install -y build-essential
+sudo aptitude install -y nginx
 sudo aptitude install -y postgresql
 
 
 sudo pg_createcluster 9.3 main --start
 sudo service postgresql restart   # 重启DB
 
+# 
+sudo gem install sass
 
 # 安装virtualenv环境
 sudo apt-get install python-virtualenv
@@ -46,6 +49,8 @@ echo "source /usr/local/bin/virtualenvwrapper.sh" >> $BASHRC
 
 # 新建prod环境
 mkvirtualenv "prod"
+cd ~/qisanstudio
+setvirtualenvproject
 
 # 把node环境加入到virtualenv
 pip install nodeenv

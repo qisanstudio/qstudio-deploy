@@ -28,4 +28,6 @@ export UWSGI_PROFILE=gevent pip install uwsgi
 # for node
 pip install nodeenv
 nodeenv --python-virtualenv          #把node环境加入到virtualenv
+
+sudo /usr/sbin/nginx -p /home/qisan/.virtualenvs/iefschina/etc/nginx -c /home/qisan/.virtualenvs/iefschina/etc/nginx/nginx.conf # start nginx
 ```
