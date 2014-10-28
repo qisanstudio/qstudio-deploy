@@ -1,0 +1,24 @@
+#! /usr/bin/sudo bash
+# File: syncdb.cron
+
+
+DBS=(iefschina express)
+BACKUPDIR=/var/DBbackup
+DATE=$(date +%Y%m%d)
+
+function do_backup {
+	DBNAME=$1
+	COMPRESSFILE=$BACKUPDIR/$DBNAME-$DATE.sql.gz
+	SQLFILE=$BACKUPDIR/$DBNAME.sql
+	sudo rm -rf $SQLFILE
+	sudo -u postgres pg_dump $DBNAME > $SQLFILE
+	sudo -u qstudio gzip -c $SQLFILE > $COMPRESSFILE
+	sudo rm -rf $SQLFILE
+	echo $DBNAME complete!
+}
+
+for dbname in ${DBS[@]};do
+	do_backup $dbname
+done
+
+

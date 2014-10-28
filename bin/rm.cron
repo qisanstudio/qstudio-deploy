@@ -1,0 +1,13 @@
+#! /usr/bin/sudo bash
+# File: rm.cron
+
+
+TARGETDIR=/home/qisan/studio/qstudio-deploy/bin
+FLIST=`ls -t $TARGETDIR`
+
+IFS='' read -a arr <<< "$FLIST"
+
+for f in ${arr[@]};do
+    echo $f
+done
+
