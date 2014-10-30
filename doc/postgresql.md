@@ -29,3 +29,17 @@ sudo dpkg-reconfigure locales
 sudo pg_createcluster 9.3 main --start
 
 ```
+
+备份数据库
+```Shell
+sudo -u postgres pg_dump $DBNAME > $DBNAME.sql
+
+```
+
+导入数据库
+```Shell
+sudo -u postgres dropdb $DBNAME
+sudo -u postgres createdb $DBNAME -O$DBNAME
+sudo -u postgres psql -d$DBNAME -f$DBNAME.sql -Upostgres
+
+```
