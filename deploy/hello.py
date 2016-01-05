@@ -55,8 +55,9 @@ def workon(env_name, use_sudo=False):
         mkvirtualenv(env_name, use_sudo)
         create = True
     with virtualenvwrapper():
-         with _workon(env_name):
+        with _workon(env_name):
             yield create
+
 
 @contextmanager
 def _workon(env_name):
@@ -149,5 +150,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-

@@ -13,16 +13,16 @@ from fabtools.user import home_directory
 __all__ = ['create_user', 'throw_brick']
 
 
-MANAGER = {'name': 'qstudio', 'pwssword': 'studio'}
+MANAGER = {'name': 'qstudio', 'password': 'studio'}
 SSH_D = os.path.join(os.path.abspath('.'), 'ssh.d')
 
 print SSH_D
 
+
 def _k(fn):
     return os.path.join(SSH_D, fn)
 
-
-env.hosts = ['microsite']
+env.hosts = ['suibe']#['microsite']
 env.user = 'qstudio'#'root'
 env.key_filename = _k('droplet_rsa.priv')
 env.warn_only = True
@@ -66,10 +66,10 @@ def throw_brick(name=MANAGER['name'],
         run("mkdir -p %s" % workspace_path)
     put('brick.sh', workspace_path, mode=0755)
     if with_github:
-        github(name=name)
+        _github(name=name)
 
 
-def github(name=MANAGER['name']):
+def _github(name=MANAGER['name']):
     ssh_path = '~/.ssh'
     if not is_dir(ssh_path):
         run("mkdir -p %s" % ssh_path)
